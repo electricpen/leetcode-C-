@@ -2,7 +2,7 @@
 {
     public class Solution
     {
-        // returns an int with number of nodes with even-valued grandparents
+        // returns an int with the sum of values of nodes with even-valued grandparents
         public int SumEvenGrandparent(TreeNode root)
         {
             // Create a counter to keep track of the sum
