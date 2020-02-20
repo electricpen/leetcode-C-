@@ -6,9 +6,12 @@ namespace LeetCode_2_Add_Two_Numbers
     {
         static void Main(string[] args)
         {
-            LinkedList test1 = new LinkedList(new ListNode(1));
-            LinkedList test2 = new LinkedList(new ListNode(3));
-            test2.AddNodeToHead(new ListNode(9));
+            LinkedList test1 = new LinkedList(new ListNode(5));
+            // test1.AddNodeToHead(new ListNode(4));
+            // test1.AddNodeToHead(new ListNode(3));
+            LinkedList test2 = new LinkedList(new ListNode(5));
+            // test2.AddNodeToHead(new ListNode(6));
+            // test2.AddNodeToHead(new ListNode(4));
 
             ListNode answer = Solution.AddTwoNumbers(test1.head, test2.head);
 
@@ -34,9 +37,10 @@ namespace LeetCode_2_Add_Two_Numbers
                 sumList.AddNodeToHead(NodeSum(pointer1, pointer2));
                 pointer1 = pointer1 == null ? null : pointer1.next;
                 pointer2 = pointer2 == null ? null : pointer2.next;
-            } while (pointer1 != null || pointer2 != null);
+            } while (pointer1 != null || pointer2 != null || carry != 0);
 
-            return sumList.head;
+            LinkedList results = sumList.ReverseList();
+            return results.head;
         }
         static public ListNode NodeSum(ListNode a, ListNode b)
         {
@@ -55,7 +59,7 @@ namespace LeetCode_2_Add_Two_Numbers
     {
         public int val;
         public ListNode next;
-        public ListNode(int x) { val = x; next = null; }
+        public ListNode(int x) { val = x; }
     }
 
     public class LinkedList
@@ -69,6 +73,26 @@ namespace LeetCode_2_Add_Two_Numbers
             ListNode oldHead = this.head;
             this.head = node;
             this.head.next = oldHead;
+        }
+
+        public void AddToHead(int val)
+        {
+            ListNode newHead = new ListNode(val);
+            ListNode oldHead = this.head;
+            this.head = newHead;
+            this.head.next = oldHead;
+        }
+
+        public LinkedList ReverseList()
+        {
+            LinkedList reverseList = new LinkedList(null);
+            ListNode current = this.head;
+            while (current != null)
+            {
+                reverseList.AddToHead(current.val);
+                current = current.next;
+            }
+            return reverseList;
         }
 
         public void PrintList()
